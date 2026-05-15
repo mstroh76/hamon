@@ -4,15 +4,42 @@
 
 ## Install
 
+### Packages
+
 ```bash
 sudo apt install python3-qtpy fonts-dseg
 ```
 
+### Autostart
+
 Add hamon to autostart file
-``vi ~/.config/lxsession/LXDE/autostart``
 
 ```bash
+mkdir -p ~/.config/autostart
+nano ~/.config/autostart/python-script.desktop
+```
+```
+[Desktop Entry]
+Type=Application
+Name=Home Assistent Monitor
+Exec=/usr/bin/python3 /home/pi/hamon.py
+X-GNOME-Autostart-enabled=true
+```
+
+or
+
+```bash
+vi ~/.config/lxsession/LXDE/autostart
+```
+
+```
 @python3 /home/pi/hamon.py
+```
+
+### Screensaver
+
+```bash
+sudo apt remove xscreensaver
 ```
 
 Disable Screen Blanking with Raspberry Pi Software Configuration Tool (raspi-config)
