@@ -26,13 +26,13 @@ Disable Screen Blanking with Raspberry Pi Software Configuration Tool (raspi-con
 
 ### 🔐 Creating an Access Token for Home Assistant (for Python API Access)
 
-## 1. Open your user profile
+1. Open your user profile
 In Home Assistant, click your **username** in the bottom-left corner to open your profile.
 
-## 2. Switch to the **“Security”** tab
+2. Switch to the **“Security”** tab
 At the top of the profile page, switch to the **“Security”** tab to access the token management section.
 
-## 3. Create a long-lived access token
+3. Create a long-lived access token
 Scroll down to the section **“Long-Lived Access Tokens”** and click **“Create Token”**.
 
 Give the token a name (e.g., *hamon*) and confirm by clicking **“Create Token”**.
