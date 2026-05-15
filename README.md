@@ -4,15 +4,13 @@
 
 ## Install
 
-### Packages
-
 ```bash
 sudo apt install python3-qtpy fonts-dseg git
 git clone https://github.com/mstroh76/hamon.git
 cd hamon
 ```
 
-## Adjust Programm
+## Adjust programm
 
 ### 🔐 Creating an Access Token for Home Assistant (for Python API Access)
 
@@ -45,8 +43,13 @@ Give the token a name (e.g., *hamon*) and confirm by clicking **“Create Token�
 python3 hamon-cli_test.py
 ```
 
+### ✅ Storing
 
-## Start
+```bash
+sudo cp hamon.py /usr/local/bin
+```
+
+## Start program
 
 ### Autostart
 
@@ -60,7 +63,7 @@ nano ~/.config/autostart/python-script.desktop
 [Desktop Entry]
 Type=Application
 Name=Home Assistent Monitor
-Exec=/usr/bin/python3 /home/pi/hamon.py
+Exec=/usr/bin/python3 /usr/local/bin/hamon.py
 X-GNOME-Autostart-enabled=true
 ```
 
@@ -71,7 +74,7 @@ vi ~/.config/lxsession/LXDE/autostart
 ```
 
 ```
-@python3 /home/pi/hamon.py
+@python3 /usr/local/bin/hamon.py
 ```
 
 ### Screensaver
@@ -98,4 +101,3 @@ Raspberry Pi Software Configuration Tool (raspi-config)
 
 Would you like to reboot now? Yes
 ```
-
