@@ -1,19 +1,34 @@
-mport requests
+import configparser
+import os
+import sys
+import requests
 import json
 
-# Home Assistant base URL
-HA_URL = "http://192.168.0.236:8123"
-
-# !!! IMPORTANT !!!
-# Replace this token with your own long-lived access token from Home Assistant
-HA_TOKEN = "REPLACE_ME_WITH_YOUR_TOKEN"
-
-# List of entity IDs to display
-# Replace all ENTITY_IDS with valid Home Assistant entity IDs
-ENTITY_IDS = [
-    "REPLACE.sensor_1", "REPLACE.sensor_2",
-    "REPLACE.sensor_3", "REPLACE.sensor_4",
+# Configuration file locations, first match wins (see hamon.conf.example)
+CONFIG_PATHS = [
+    os.path.expanduser("~/.config/hamon/hamon.conf"),
+    os.path.join(os.path.dirname(os.path.abspath(__file__)), "hamon.conf"),
+    "/etc/hamon.conf",
 ]
+
+# Optional: pass the configuration file as first argument
+if len(sys.argv) > 1:
+    config_path = sys.argv[1]
+else:
+    config_path = next((p for p in CONFIG_PATHS if os.path.isfile(p)), None)
+
+if config_path is None or not os.path.isfile(config_path):
+    print("ERROR: No configuration file found. Copy hamon.conf.example to one of:")
+    for p in CONFIG_PATHS:
+        print("  " + p)
+    exit(1)
+
+config = configparser.ConfigParser(interpolation=None)
+config.read(config_path, encoding="utf-8")
+
+HA_URL = config.get("homeassistant", "url", fallback="").rstrip("/")
+HA_TOKEN = config.get("homeassistant", "token", fallback="")
+ENTITY_IDS = list(config["entities"]) if config.has_section("entities") else []
 
 headers = {
     "Authorization": f"Bearer {HA_TOKEN}",
@@ -21,6 +36,7 @@ headers = {
 }
 
 print("=== Home Assistant API Test ===")
+print(f"Config: {config_path}")
 print(f"Server: {HA_URL}")
 print("Testing connection...\n")
 

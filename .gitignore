@@ -1,0 +1,3 @@
+# local configuration contains the Home Assistant access token
+hamon.conf
+__pycache__/

@@ -29,18 +29,46 @@ Give the token a name (e.g., *hamon*) and confirm by clicking **“Create Token�
 
 ---
 
-### 🔧 Adjustments in the Python programs 'hamon.py' and 'hamon-cli_test.py'
+### 🔧 Configuration file 'hamon.conf'
 
-- Replace the token at **`REPLACE_ME_WITH_YOUR_TOKEN`**.
-- Copy the sensor names from Home Assistant and replace them in the Python code at **`REPLACE.sensor`**.
-- Use **`VALUE_COLORS`** to customize the colors for each value.
-- Use **`UPDATE_INTERVAL_MS`** to adjust the update interval.
-- Set **`HA_URL`** to the URL or IP address of your Home Assistant instance.
+All settings are stored in a configuration file, which is used by 'hamon.py' and 'hamon-cli-test.py'.
+
+```bash
+mkdir -p ~/.config/hamon
+cp hamon.conf.example ~/.config/hamon/hamon.conf
+chmod 600 ~/.config/hamon/hamon.conf
+nano ~/.config/hamon/hamon.conf
+```
+
+The file is searched in `~/.config/hamon/hamon.conf`, next to `hamon.py` and in `/etc/hamon.conf`.
+A different file can be passed with `hamon.py -c /path/to/hamon.conf`.
+
+Section **`[homeassistant]`**
+- **`url`**: URL or IP address of your Home Assistant instance.
+- **`token`**: Replace **`REPLACE_ME_WITH_YOUR_TOKEN`** with your access token.
+
+Section **`[display]`**
+- **`update_interval_ms`**: Update interval in milliseconds.
+- **`font_family`**: Font for the values, e.g. `DejaVu Sans`, `DSEG7 Classic` or `DSEG14 Classic`.
+- **`font_size`**: Font size in points, or `auto` to fit the values to the screen.
+- **`font_bold`**: `yes` or `no`.
+
+Section **`[entities]`**
+- One line per value: **`entity_id = color`**. Copy the sensor names from Home Assistant and replace **`REPLACE.sensor`**.
+- Two values are shown per row: 4 entries give a 2-row display, 6 entries give a 3-row display.
+
+```ini
+[entities]
+sensor.living_room_temperature = #FFFFFF
+sensor.outdoor_temperature = #FFA500
+sensor.power_consumption = #DCE6BC
+sensor.solar_power = #ADD8E6
+```
 
 ### 🧪 Testing
 
 ```bash
-python3 hamon-cli_test.py
+python3 hamon-cli-test.py
 ```
 
 ### ✅ Storing

@@ -1,0 +1,39 @@
+# hamon configuration
+#
+# Copy this file to one of the following locations and adjust it:
+#   ~/.config/hamon/hamon.conf
+#   hamon.conf next to hamon.py
+#   /etc/hamon.conf
+# or pass the path explicitly: hamon.py -c /path/to/hamon.conf
+
+[homeassistant]
+# Home Assistant base URL
+url = http://192.168.0.1:8123
+
+# !!! IMPORTANT !!!
+# Replace this token with your own long-lived access token from Home Assistant
+token = REPLACE_ME_WITH_YOUR_TOKEN
+
+[display]
+# Update interval in milliseconds
+update_interval_ms = 2000
+
+# Font for the displayed values, e.g. "DejaVu Sans", "DSEG7 Classic", "DSEG14 Classic"
+font_family = DejaVu Sans
+
+# Font size in points, or "auto" to fit the values to the screen
+font_size = auto
+
+# Bold font: yes / no
+font_bold = yes
+
+[entities]
+# One line per value:  entity_id = color
+# Two values are shown per row, so 4 entries give 2 rows and 6 entries give 3 rows.
+# Replace all entity IDs with valid Home Assistant entity IDs
+REPLACE.sensor_1 = #FFFFFF
+REPLACE.sensor_2 = #FFA500
+REPLACE.sensor_3 = #DCE6BC
+REPLACE.sensor_4 = #ADD8E6
+REPLACE.sensor_5 = #90EE90
+REPLACE.sensor_6 = #FFB6C1
